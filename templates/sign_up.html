@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <title>Registration form</title>
+        <link rel="stylesheet" href="static\app.css"/>
+    </head>
+    <body>
+        <form action="/submit" method="POST">
+            <div class="container">
+            <h1> SIGN UP </h1>
+            
+            <hr/>
+            <lable for="fn"> FIRST NAME:</lable>
+            <input type="text" placeholder="name" name="n" id="n" required/><br>
+
+            <lable for="sn"> EMAIL:</lable>
+            <input type="text" placeholder="email" name="el" id="el" required/><br>
+
+            <lable for="psw"> PASSWORD:</lable>
+            <input type="password" placeholder="Enter password" name="psw" id="psw" required/><br>
+
+            <lable for="cpsw"> PASSWORD:</lable>
+            <input type="password" placeholder="Enter confirm password" name="cpsw" id="cpsw" required/><br>
+            <p>Already have an account?<a href="/login">LOG IN</a></p>
+        </hr>
+            
+                <button class="registerbtn" type="submit" onclick="showPopup()">SIGN UP</button>
+                        
+                <button class="registerbtn" type="cancle" id="cancel_btn">CANCLE</button>
+
+                                    
+        </form>
+    </div>
+    <script>
+        
+        function showPopup() {
+            alert('Hello\nRegistration successful!');
+            setTimeout(function() {
+                closePopup();
+            }, 3000); // Adjust the time (in milliseconds) you want the popup to be displayed
+            return true; // Allow the form submission
+        }
+
+        function closePopup() {
+            // Close the popup here (you can customize this as needed)
+            alert('Popup is closing automatically.');
+        }
+
+        // Add an event listener to the Cancel button
+        var cancelBtn = document.getElementById("cancelBtn");
+        cancelBtn.addEventListener("click", function() {
+            alert("Registration canceled!");
+        });
+        </script>
+    </script>
+    </body>
+</html>

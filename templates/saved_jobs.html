@@ -1,0 +1,127 @@
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Jobs</title>
+</head>
+<body>
+    <header>
+        <h1>Saved Jobs</h1>
+    </header>
+    <div class="container">
+        <div class="saved">
+            <table border="1">
+                <tr>
+                    <th>Job Title</th>
+                    <th>Location</th>
+                </tr>
+                {% for job in job_list %}
+                <tr>
+                    <td>{{ job_list[0] }}</td>
+                    <td>{{ job_list[1] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+        h2 {
+            margin-inline-start: 40px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .saved {
+            border: 1px solid #ccc;
+            padding: 30px;
+            margin-bottom: 10px;
+        }
+
+        .job-title {
+            font-size: 20px;
+        }
+
+        .job-experience {
+            color: #666;
+        }
+
+        .job-education {
+            color: #666;
+        }
+
+        .job-location {
+            font-style: italic;
+        }
+
+        .job-description {
+            margin-top: 10px;
+        }
+
+        ul {
+        list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+        
+            <header>
+                <h1>Saved Jobs</h1>
+            </header>
+            <div class="container">
+            <div class="saved">
+                
+                <ul id="job_list">
+                    {% for job in jobs %}
+                    <li class="saved">
+                        <h3 class="job-title">{{ job.title }}</h3>
+                        <p class="job-location">Location: {{ job.location }}</p>
+                        <p class="job-education">Education: {{ job.education }}</p>
+                        <p class="job-experience">Experience: {{ job.experience }}</p>
+                        <form method="post" action="/remove_job/{{ loop.index0 }}">
+                            <button class="remove-button" type="submit">Remove</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+    
+
+            </div>
+            </div>
+        
+    
+        
+</body>
+</html>

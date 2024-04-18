@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <title>Registration form</title>
+        <link rel="stylesheet" href="static\app1.css"/>
+    </head>
+    <body>
+        <form action="/check_login" method="POST">
+            <div class="container">
+            <h1> LOGIN </h1>
+            
+            <hr/>
+            <lable for="fn"> USERNAME</lable>
+            <input type="text" placeholder="name" name="n" id="n" required/><br>
+
+       
+
+            <lable for="psw"> PASSWORD:</lable>
+            <input type="password" placeholder="Enter password" name="psw" id="psw" required/><br>
+            <div class="remember-me--forget-password">
+				<!-- Angular -->
+	<label>
+		<input type="checkbox" name="item" checked/>
+		<span class="text-checkbox">Remember me</span>
+	</label>
+		
+		</div>
+			<p> Don't have an account?<a href="/sign_up">SIGNUP</a></p>
+        </hr>
+        
+            
+               
+                    
+                <button class="registerbtn" type="login" onclick=checkLogin()>LOGIN</button>
+                <button class="registerbtn" type="cancel">CANCEL</button>
+                                    
+        </form>
+    </div> 
+    <script>
+        function checkLogin() {
+            var username = document.getElementById("n").value;
+            var password = document.getElementById("cpsw").value;
+            
+            // Send a request to the Flask server to check the CSV file
+            fetch("/check_login?username=" + username + "&password=" + password)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        alert("Login successful!");
+                        window.location.href = "/main.html";
+                    } else {
+                        alert("Login failed. Username or password is incorrect.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+    </body>
+</html>

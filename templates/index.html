@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+        h2 {
+            margin-inline-start: 40px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-listing {
+            border: 1px solid #ccc;
+            padding: 30px;
+            margin-bottom: 10px;
+        }
+
+        .job-title {
+            font-size: 20px;
+        }
+
+        .job-education {
+            color: #666;
+        }
+
+        .job-experience {
+            color: #666;
+        }
+        .job-location {
+            font-style: italic;
+        }
+
+        .job-description {
+            margin-top: 10px;
+        }
+
+        ul {
+        list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+        
+            <header>
+                <h1>Job Finder</h1>
+            </header>
+            <div class="container">
+            <div class="job-listings">
+                <h2>Job Listings</h2>
+                <ul id="job-list">
+                    {% for job in job_data %}
+                    <a href="/job_details"><li class="job-listing">
+                        <h3 class="job-title">{{ job['title'] }}</h3>
+                        <p class="job-location">Location: {{ job['location'] }}</p>
+                        <p class="job-education">Education: {{ job['education'] }}</p>
+                        <p class="job-experience">Experience: {{ job['experience'] }}</p>
+                        <form method="post" action="/save_job">
+                            <input type="hidden" name="title" value="{{ job['title'] }}">
+                            <input type="hidden" name="location" value="{{ job['location'] }}">
+                            <input type="hidden" name="education" value="{{ job['education'] }}">
+                            <input type="hidden" name="experience" value="{{ job['experience'] }}">
+                            <button type="submit" class="btn btn-primary">SAVE</button>
+                        </form>
+                    </li></a>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            </div>
+        
+    
+        
+</body>
+</html>

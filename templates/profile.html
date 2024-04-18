@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            background-color: black;
+            color: #fff;
+            border: none;
+            padding: 5px 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        #profilePicContainer {
+            display: none;
+            margin-top: 10px;
+        }
+
+        #uploadedProfilePic {
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Profile</h1>
+    <div class="container">
+        <h2>Basic Information</h2>
+        <p>Name: {{ username }}</p>
+        <p>Email: {{ email }}</p>
+
+        <h2>Upload Profile Picture</h2>
+        <form action="/upload_profile_pic" method="POST" enctype="multipart/form-data" id="uploadForm">
+            <label for="profilePicInput">Select a profile picture:</label>
+            <input type="file" name="profile_pic" id="profilePicInput">
+            <input type="hidden" name="username" value="{{ username }}">
+            <label class="custom-file-upload">
+                Upload Profile Picture
+                <input type="button" value="Upload Profile Picture" onclick="uploadProfilePic()">
+            </label>
+        </form>
+
+        <div id="profilePicContainer">
+            <h3>Profile Picture</h3>
+            <img id="uploadedProfilePic" alt="Uploaded Profile Picture" width="150">
+        </div>
+
+        <h2>Upload Resume PDF</h2>
+        <form action="/upload_resume" method="POST" enctype="multipart/form-data">
+            <label for="resumeInput">Select your resume (PDF):</label>
+            <input type="file" name="resume" id="resumeInput">
+            <label class="custom-file-upload">
+                Upload Resume PDF
+                <input type="button" value="Upload Resume PDF" onclick="uploadResume()">
+            </label>
+        </form>
+    </div>
+
+    <script>
+        function uploadResume() {
+            // You can replace this with your logic for uploading the resume.
+            // For this example, we'll just show an alert.
+            alert("Resume uploaded successfully!");
+        }
+
+        function uploadProfilePic() {
+            // Get the form, input, and uploaded image elements
+            var uploadForm = document.getElementById('uploadForm');
+            var profilePicInput = document.getElementById('profilePicInput');
+            var uploadedProfilePic = document.getElementById('uploadedProfilePic');
+            var profilePicContainer = document.getElementById('profilePicContainer');
+
+            // Create a FormData object to handle the file upload
+            var formData = new FormData(uploadForm);
+
+            // Make an AJAX request to handle the file upload
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/upload_profile_pic', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Display the uploaded image immediately
+                    uploadedProfilePic.src = URL.createObjectURL(profilePicInput.files[0]);
+                    profilePicContainer.style.display = 'block';
+                } else {
+                    // Handle the error (e.g., show an alert)
+                    alert('Error uploading profile picture.');
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+</body>
+</html>

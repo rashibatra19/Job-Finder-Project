@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply for a Job</title>
+</head>
+<body>
+    
+    {{ result | safe }}
+    <script>
+        // Immediately show the popup and redirect
+        setTimeout(function() {
+            alert("You have applied for job successfully");
+            window.location.href = '/job_listings'; // Redirect to job_listings
+        }, 2000); // 5000 milliseconds (5 seconds)
+    </script>
+</body>
+</html>
